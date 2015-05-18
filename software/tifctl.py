@@ -48,6 +48,10 @@ def findTif():
         s += "  Serial Number:" + repr(serialNumber)
       print(s)
     print("\n")
+    if found == False:
+      vid=0x10c4
+      pid=0xea90
+      found = True;
 
   except:
     found = False;
@@ -130,10 +134,10 @@ def showTraceID(handle):
 ## EN off - read from SRAM
 def showUsercode(handle):
   buff = create_string_buffer(4)
-  res = tifglobs.tif.doEnableCfgInterfaceTransparent(handle)
+  res = tifglobs.tif.enableCfgInterfaceTransparent(handle)
   notBusy(handle)
   res = tifglobs.tif.getUsercode(handle, buff)
-  res = tifglobs.tif.doDisableCfgInterface(handle)
+  res = tifglobs.tif.disableCfgInterface(handle)
   print("XO2 usercode from Flash: ") ,
   print4(buff)
 
@@ -189,7 +193,7 @@ def main():
   print("====================hello==========================")
   handle = None
   try:
-    tifglobs.tif = ctypes.CDLL("libtif.dll")
+    tifglobs.tif = ctypes.CDLL("libtif.so")
 
     strBuf = create_string_buffer(1000)
     rv = tifglobs.tif.version(strBuf, sizeof(strBuf))
@@ -205,12 +209,12 @@ def main():
       # the ID register, but you really need to run this under the control
       # of a debugger if you want to see the effect on the flashing LEDs.
       # The LEDs start out synchronized and end up alternating
-      setMiscRegister(handle, LED_OFF)
-      showIDregister(handle)
-      setMiscRegister(handle, LED_SYNC)
-      showIDregister(handle)
-      setMiscRegister(handle, LED_ALTERNATING)
-      showIDregister(handle)
+#      setMiscRegister(handle, LED_OFF)
+#      showIDregister(handle)
+#      setMiscRegister(handle, LED_SYNC)
+#      showIDregister(handle)
+#      setMiscRegister(handle, LED_ALTERNATING)
+#      showIDregister(handle)
 
   except:
     e = sys.exc_info()[0]

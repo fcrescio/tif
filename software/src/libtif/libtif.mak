@@ -1,4 +1,4 @@
-UNIFLAGS	= -Wall -g -fPIC -I. -DBUILDING_LIBTIF -fvisibility=hidden -lusb
+UNIFLAGS	= -Wall -g -fPIC -I. -DBUILDING_LIBTIF -fvisibility=hidden -lusb -fpermissive
 CXX		= g++
 CXXFLAGS	= -ansi $(UNIFLAGS) -fvisibility-inlines-hidden
 CC			= gcc
