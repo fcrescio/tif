@@ -1,0 +1,3 @@
+[submodule "software/pyhidapi"]
+	path = software/pyhidapi
+	url = git://github.com/fcrescio/pyhidapi
